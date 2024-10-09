@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -47,5 +48,29 @@ class User extends Authenticatable
 
     public function posts() : HasMany {
         return $this->hasMany(Post::class) ; 
+    }
+
+    public function messagesTo() {
+
+        return $this->hasMany(Message::class, 'to_id') ; 
+    }
+
+    public function messagesFrom() {
+
+        return $this->hasMany(Message::class, 'from_id') ; 
+    }
+
+
+    public function lastMessage() {
+
+        return Message::where(function($query) {
+                
+            $query->where('from_id', Auth::user()->id)->where('to_id', $this->id)  ; 
+
+        })->orWhere(function($query) {
+
+            $query->where('from_id', $this->id)->where('to_id', Auth::user()->id) ; 
+            
+        })->orderBy('created_at', 'desc')->latest()->first() ; 
     }
 }

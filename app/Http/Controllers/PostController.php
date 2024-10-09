@@ -7,7 +7,7 @@ use App\Http\Requests\SearchPostRequest;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {

@@ -79,16 +79,7 @@
     <div class="dashboard-main-content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6 responsive-column--m">
-                    <div class="form-box">
-                        <div class="form-title-wrap">
-                            <h3 class="title">Statics Results</h3>
-                        </div>
-                        <div class="form-content">
-                            <canvas id="bar-chart"></canvas>
-                        </div>
-                    </div>     <!-- end form-box -->
-                </div>     <!-- end col-lg-6 -->
+            
                 <div class="col-lg-6 responsive-column--m">
                     <div class="form-box dashboard-card">
                         <div class="form-title-wrap">
@@ -216,91 +207,7 @@
                     </div>  <!-- end form-box -->
                 </div>     <!-- end col-lg-6 -->
 
-                <div class="col-lg-6 responsive-column--m">
-                    <div class="form-box dashboard-card">
-                        <div class="form-title-wrap">
-                            <h3 class="title">Tasks</h3>
-                        </div>
-
-                        <div class="form-content">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" >
-                                <i class="la la-check me-2"></i>Your booking
-                                <a href="user-dashboard.html#" class="alert-link">Shimla to Goa</a> has beendone!
-                                <button
-                                    type="button"
-                                    class="btn-close close"
-                                    data-bs-dismiss="alert"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" >
-                                <i class="la la-check me-2"></i>Sent Email to
-                                <strong>dev@gmail.com</strong>
-                                <button
-                                    type="button"
-                                    class="btn-close close"
-                                    data-bs-dismiss="alert"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" >
-                                <i class="la la-check me-2"></i>Received Email from
-                                <strong>tripstar@yahoo.com</strong>
-                                <button
-                                    type="button"
-                                    class="btn-close close"
-                                    data-bs-dismiss="alert"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" >
-                                <i class="la la-check me-2"></i>your payment is pendingfor <a href="user-dashboard.html#" class="alert-link">Manali</a> Trip tour!
-                                <button
-                                    type="button"
-                                    class="btn-close close"
-                                    data-bs-dismiss="alert"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" >
-                                <i class="la la-check me-2"></i>Someone reply on your comment on
-                                <a href="user-dashboard.html#" class="alert-link">London Trip</a> Tour!
-                                <button
-                                    type="button"
-                                    class="btn-close close"
-                                    data-bs-dismiss="alert"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" >
-                                <i class="la la-check me-2"></i>You have canceled
-                                <a href="user-dashboard.html#" class="alert-link">Dubai to london Trip</a>
-                                <button
-                                    type="button"
-                                    class="btn-close close"
-                                    data-bs-dismiss="alert"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" >
-                                <i class="la la-check me-2"></i>You have give a review on
-                                <span class="badge text-bg-warning text-white">4.5</span>
-                                <a href="user-dashboard.html#" class="alert-link">EnVision Hotel Boston</a>
-                                <button
-                                    type="button"
-                                    class="btn-close close"
-                                    data-bs-dismiss="alert"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-                        </div>
-                    </div>     <!-- end form-box -->
-                </div>    <!-- end col-lg-6 -->
+                
 
                 <div class="col-lg-6 responsive-column--m">
                     <div class="form-box dashboard-card order-card border-0">

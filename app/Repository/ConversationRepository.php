@@ -13,7 +13,16 @@ class ConversationRepository {
 
     public function getConversation( int $user_id ) {
 
-        return $this->user->query()->where('id', '!=', $user_id)->get() ; 
+        return $this->user->query()->where('id', '!=', $user_id)->get()->sortByDesc(function ($user) {
+            // Récupère le dernier message entre les deux utilisateurs
+            $latestMessageFrom = $user->messagesFrom->first();
+            $latestMessageTo = $user->messagesTo->first();
+    
+            // Compare les deux pour obtenir le dernier message
+            $latestMessageDate = max(optional($latestMessageFrom)->created_at, optional($latestMessageTo)->created_at);
+            
+            return $latestMessageDate;
+        }) ; 
     }
 
 

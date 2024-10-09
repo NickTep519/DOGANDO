@@ -272,9 +272,9 @@
                             
                                                     <div class="flex-grow-1 overflow-hidden">
                                                         <h5 class="text-truncate font-size-15 mb-1">{{$conversation->name}}</h5>
-                                                        <p class="chat-user-message text-truncate mb-0">Hey! there I'm available</p>
+                                                        <p class="chat-user-message text-truncate mb-0">{{$conversation->lastMessage() !== NULL ? $conversation->lastMessage()->content : '' }}</p>
                                                     </div>
-                                                    <div class="font-size-11">05 min</div>
+                                                    <div class="font-size-11"> {{$conversation->lastMessage() !== NULL ? $conversation->lastMessage()->created_at->diffForHumans() : ''  }} </div>
                                                     <div class="unread-message">
                                                         <span class="badge badge-soft-danger rounded-pill">02</span>
                                                     </div>

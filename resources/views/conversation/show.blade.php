@@ -17,7 +17,7 @@
                                     <a href="javascript: void(0);" class="user-chat-remove text-muted font-size-16 p-2"><i class="ri-arrow-left-s-line"></i></a>
                                 </div>
                                 <div class="me-3 ms-0">
-                                    <img src= {{asset("asset/images/users/avatar-4.jpg")}}  class="rounded-circle avatar-xs" alt="">
+                                    <img src= {{asset("asset/images/users/avatar-2.jpg")}}  class="rounded-circle avatar-xs" alt="">
                                 </div>
                                 <div class="flex-grow-1 overflow-hidden">
                                     <h5 class="font-size-16 mb-0 text-truncate"><a href="index.html#" class="text-reset user-profile-show"> {{$actif_user->name}} </a> <i class="ri-record-circle-fill font-size-10 text-success d-inline-block ms-1"></i></h5>
@@ -105,7 +105,7 @@
                         <li class="right">
                             <div class="conversation-list">
                                 <div class="chat-avatar">
-                                    <img src= {{asset("asset/images/users/avatar-1.jpg")}}  alt="">
+                                    <img src= {{asset("asset/images/users/avatar-2.jpg")}}  alt="">
                                 </div>
 
                                 <div class="user-chat-content">
@@ -139,7 +139,7 @@
                         <li>
                             <div class="conversation-list">
                                 <div class="chat-avatar">
-                                    <img src= {{asset("asset/images/users/avatar-4.jpg")}}  alt="">
+                                    <img src= {{asset("asset/images/users/avatar-2.jpg")}}  alt="">
                                 </div>
 
                                 <div class="user-chat-content">
