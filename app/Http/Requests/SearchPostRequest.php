@@ -22,6 +22,7 @@ class SearchPostRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title' => ['string', 'nullable'],
             'kg' => ['numeric', 'gt:0', 'nullable'],
             'price' => ['numeric','gt:0', 'nullable'],
             'city_starts' => ['string', 'nullable'],

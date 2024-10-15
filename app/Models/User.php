@@ -73,4 +73,10 @@ class User extends Authenticatable
             
         })->orderBy('created_at', 'desc')->latest()->first() ; 
     }
+
+
+    public function unreadCount() {
+
+        return $this->messagesFrom()->where('read_at', NULL)->count()  ; 
+    }
 }

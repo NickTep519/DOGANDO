@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="col-sm-8 col-4">
-                            <ul class="list-inline user-chat-nav text-end mb-0">   
+                          <!--  <ul class="list-inline user-chat-nav text-end mb-0">   
 
                                 <li class="list-inline-item">
                                     <div class="dropdown">
@@ -76,7 +76,7 @@
                                 </li>   
 
                             </ul>                                    
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- end chat user head -->
@@ -203,7 +203,7 @@
                             @csrf
 
                             <div class="col">
-                                <input type="text" name="content" class="form-control form-control-lg bg-light border-light" placeholder="Enter Message...">
+                                <input type="text" name="content" class="form-control form-control-lg bg-light border-light" placeholder="Entrer un message...">
                             </div>
 
                             <div class="col-auto">

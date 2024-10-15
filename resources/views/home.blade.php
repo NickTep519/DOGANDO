@@ -38,7 +38,7 @@
                         <p>Votre bagage ou votre colis, tout trouve sa place ici. Gagnez de l’argent en transportant ou trouvez facilement un transporteur pour vos envois internationnaux.
                              Voyagez léger, envoyez sereinement ! Connectez-vous avec des voyageurs ou expéditeurs pour rendre vos trajets ou envois encore plus utiles.</p>
                         <div class="banner-btn">
-                            <a href="{{route('posts.index')}}" class="btn--base"><i
+                            <a href="{{route('annonces.voyage')}}" class="btn--base"><i
                                     class="fas fa-chevron-right mr-2"></i> Commencer </a>
                             <a href="{{route('login')}}" class="btn--base active">Se connceter <i
                                     class="icon-Group-2361 ml-2"></i></a>
@@ -340,7 +340,7 @@
                                             <span class="price">Price: {{$post->price}} / kg</span>
                                         </div>
                                         <div class="charter-btn">
-                                            <a href="{{route('posts.show', $post)}}"><i class="icon-btn-icon-v2"></i> Savoir plus</a>
+                                            <a href="{{route('posts.show',[$post->slug(), $post])}}"><i class="icon-btn-icon-v2"></i> Savoir plus</a>
                                         </div>
                                     </div>
                                 </div>
@@ -418,7 +418,7 @@
                                             <span class="price">Price: {{$post->price}} / kg</span>
                                         </div>
                                         <div class="charter-btn">
-                                            <a href="{{route('posts.show', $post)}}"><i class="icon-btn-icon-v2"></i> Savoir plus</a>
+                                            <a href="{{route('posts.show', [$post->slug(), $post])}}"><i class="icon-btn-icon-v2"></i> Savoir plus</a>
                                         </div>
                                     </div>
                                 </div>

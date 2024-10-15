@@ -276,7 +276,9 @@
                                                     </div>
                                                     <div class="font-size-11"> {{$conversation->lastMessage() !== NULL ? $conversation->lastMessage()->created_at->diffForHumans() : ''  }} </div>
                                                     <div class="unread-message">
-                                                        <span class="badge badge-soft-danger rounded-pill">02</span>
+                                                        @if ($conversation->unreadCount() !==0 )
+                                                        <span class="badge badge-soft-danger rounded-pill"> {{ $conversation->unreadCount() }} </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </a>

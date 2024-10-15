@@ -81,8 +81,8 @@
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav main-menu ml-auto">
-                                        <li class="menu_has_children"><a href="{{route('home')}}"> </a></li>
-                                        <li><a href="{{route('home')}}"></a></li>
+                                        <li class="menu_has_children"><a href="{{route('annonces.voyage')}}"> Voyageurs </a></li>
+                                        <li><a href="{{route('annonces.expedition')}}"> Expediteur </a></li>
                                         <li class="menu_has_children"><a href="{{route('home')}}"></a></li>
                                         @auth
                                         <li><a href="{{route('dashboard.user')}}"> {{Auth::user()->name}}</a></li>
@@ -103,18 +103,18 @@
                                         <li class="menu_has_children"><a href="{{route('login')}}">Se Conecter</a></li>
                                         @endguest
                                     </ul>
-                                    <div class="header-right">
+                                    <!--<div class="header-right">
                                         <div class="search-bar d-none d-lg-block">
                                         </div>
                                         <div class="header-action-area">
                                             <a href="service-details.html" class="action-btn two"><i
                                                     class="icon-btn-icon"></i></a>
                                             <div class="header-action">
-                                                <a href="{{route('posts.index')}}" class="btn--base"><i
+                                                <a href="{{route('annonces.voyage')}}" class="btn--base"><i
                                                         class="icon-btn-icon"></i>Voir des annonces</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </nav>
                         </div>
@@ -140,7 +140,7 @@
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         Start Scroll-To-Top
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <a href="index.html#" class="scrollToTop">
+        <a href="#" class="scrollToTop">
             <i class="las la-dot-circle"></i>
             <span>Top</span>
         </a>

@@ -29,13 +29,23 @@ class ConversationController extends Controller
     public function show(User $user) {
 
         $this->authorize('talkTo', $user)    ; 
+
+        $messages = $this->conversationRepository->getMessages($this->auth_user->user()->id, $user->id) ; 
+
+        foreach ($messages->get() as $message) {
+            
+            if ($message->read_at === NULL) {
+                $message->read_at = now() ; 
+                $message->save() ; 
+            }
+        }
         
         return view('conversation.show', [
             'conversation_users' => $this->conversationRepository->getConversation($this->auth_user->user()->id),
             'status_users' => $this->conversationRepository->getConversationStatus($this->auth_user->user()->id) , 
             'auth_user' => $this->auth_user->user(),
             'actif_user' => $user,
-            'messages' => $this->conversationRepository->getMessages($this->auth_user->user()->id, $user->id)->paginate(25) ,  
+            'messages' => $messages->paginate(25) ,  
         ]) ; 
     }
 

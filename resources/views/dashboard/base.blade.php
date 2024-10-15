@@ -346,9 +346,10 @@
               >
             </li>
             <li>
-              <a href="{{route('logout')}}"
-                ><i class="la la-power-off me-2 text-color-6"></i>Logout</a
-              >
+              <form action="{{route('logout')}}" method="POST" >
+                @csrf
+              <button style="background: none; border: none; padding-left: 12px; font: inherit; color: inherit;"  > <i class="la la-power-off me-2 text-color-6"></i>Logout </button>
+              </form>
             </li>
           </ul>
         </div>
@@ -488,16 +489,14 @@
                                                         </div>    <!-- end msg-body -->
                                                     </a>
                                                     <div class="section-block"></div>
-                                                    <a
-                                                        href="{{route('logout')}}"
-                                                        class="list-group-item list-group-item-action"
-                                                    >
                                                     <div class="msg-body">
                                                         <div class="msg-content">
-                                                            <h3 class="title"> <i class="la la-power-off me-2"></i> Logout </h3>
+                                                          <form action="{{route('logout')}}" method="POST">
+                                                            @csrf
+                                                            <button style="background: none; border: none; padding-left: 17px; font: inherit; color: inherit;"  class="list-group-item list-group-item-action" class="title" > <i class="la la-power-off me-2"></i> Logout </button>
+                                                          </form>
                                                         </div>
                                                     </div>    <!-- end msg-body -->
-                                                    </a>
                                                 </div>
                                             </div>    <!-- end dropdown-menu -->
                                         </div>

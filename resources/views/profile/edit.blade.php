@@ -104,7 +104,7 @@
                                         <span class="la la-phone form-icon"></span>
                                         <input
                                             class="form-control"
-                                            id="phone" name="phone" type="tel" 
+                                            id="phone" name="phone" type="Tel" 
                                             value=" {{old('phone', $user->phone)}} "
                                             required autocomplete="username"
                                         />
