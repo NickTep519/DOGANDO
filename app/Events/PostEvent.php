@@ -9,7 +9,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class PostEvent implements ShouldBroadcast
+class PostEvent 
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

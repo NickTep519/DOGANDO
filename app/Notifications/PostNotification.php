@@ -58,7 +58,7 @@ class PostNotification extends Notification
         
         return [
             'notif' => $notif,
-            'link'  => route('posts.show', $this->post),
+            'link'  => route('posts.show', [ $this->post->slug(), $this->post ]),
             'post' => $this->post,
         ]  ;
     }

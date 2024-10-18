@@ -66,8 +66,11 @@ class PostController extends Controller
             'ends_at' => now()->month(11)
         ]) ; 
 
+        $transport = ['avion', 'bateau'] ; 
+
         return view('post.form', [
-            'post' => $post
+            'post' => $post, 
+            'transports' => $transport
         ])  ; 
     }
 
@@ -98,8 +101,13 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+
+        $transport = ['avion', 'bateau'] ; 
+
+
         return view('post.form', [
-            'post' => $post
+            'post' => $post,
+            'transports' => $transport
         ]) ; 
     }
 

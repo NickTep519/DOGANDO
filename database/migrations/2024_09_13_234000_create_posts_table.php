@@ -20,8 +20,7 @@ return new class extends Migration
             $table->integer('price')->nullable() ; 
             $table->string('city_starts') ;
             $table->string('city_ends') ; 
-            $table->string('company')->nullable() ; 
-            $table->string('flight_number')->nullable() ; 
+            $table->string('m_transport')->nullable() ; 
             $table->boolean('type')->default(false) ; 
             $table->boolean('status')->default(false) ; 
             $table->timestamp('starts_at')->nullable() ; 

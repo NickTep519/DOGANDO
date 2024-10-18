@@ -13,12 +13,12 @@
                 <div class="row justify-content-center align-items-center">
                     <div class="col-xl-12 text-center">
                         <div class="banner-content">
-                            <h1 class="title">Deals Single</h1>
+                            <h1 class="title">Details</h1>
                             <div class="breadcrumb-area">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Deals Single</li>
+                                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Details</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -59,7 +59,7 @@ End Banner
                         <div class="about-list-area about-list--style">
                             <ul class="about-list">
                                 <li>Ville de Depart : {{$post->city_starts}}.</li>
-                                <li>Ville d'Arrivée : {{$post->city_ends}} </li>
+                                <li>Ville d'Arrivée : {{$post->city_ends}}.</li>
                                 @if ($post->type == true)
                                 <li>Date de Depart : {{$post->starts_at->translatedFormat('d M Y') }} </li>
                                 <li>Date d'Arrivée : {{$post->ends_at->translatedFormat('d M Y')}} </li>
@@ -86,25 +86,12 @@ End Banner
    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         Start Statistics
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
     <section class="statistics-section statistics--style ptb-120">
         <div class="container">
             <div class="statistics-area">
                 <div class="row justify-content-center mb-30-none">
-                    @if ($post->type == true)
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-30">
-                        <div class="statistics-item">
-                            <div class="statistics-icon">
-                                <i class="icon-Take_off_Distance"></i>
-                            </div>
-                            <div class="statistics-content">
-                                <div class="odo-area">
-                                    <h3 class="odo-title odometer" data-odometer-final="{{$post->flight_number}}">0</h3>
-                                </div>
-                                <p>Numero du vol</p>
-                            </div>
-                        </div>
-                    </div>           
-
+                    @if ($post->type == true)          
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-30">
                         <div class="statistics-item">
                             <div class="statistics-icon">
@@ -136,22 +123,19 @@ End Banner
                         </div>
                     </div>
 
-                    @if ($post->type == true)
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-30">
                         <div class="statistics-item">
                             <div class="statistics-icon">
-                                <i class="icon-Max_Passenger"></i>
+                                <i class="icon-Take_off_Distance"></i>
                             </div>
                             <div class="statistics-content">
-                                <div class="odo-area">
-                                    <h3 class="odo-title odometer" data-odometer-final="{{$post->flight_number}}">0</h3>
+                                <div class="odo-are">
+                                    <h3 class="odo-title odomete" >  {{ ucfirst($post->m_transport) }} </h3>
                                 </div>
-                                <p>Compagnie : {{$post->company}}</p>
+                                <p>Transport</p>
                             </div>
                         </div>
-                    </div>      
-                    @endif
-                  
+                    </div> 
 
                 </div>
             </div>

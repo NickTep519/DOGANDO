@@ -30,7 +30,7 @@ class AnnoncesController extends Controller
             $query->where('city_ends', 'like', "%{$data['city_ends']}%") ; 
         }
 
-        $posts = $query->where('type', true)->paginate(24) ; 
+        $posts = $query->where('type', 1)->paginate(24) ; 
 
         //dd($posts) ; 
 
@@ -64,7 +64,7 @@ class AnnoncesController extends Controller
             $query->where('city_ends', 'like', "%{$data['city_ends']}%") ; 
         }
 
-        $posts = $query->where('type', false)->paginate(24) ; 
+        $posts = $query->where('type', 0)->paginate(24) ; 
 
         return view('post.index.expedition', [
             'posts' => $posts, 

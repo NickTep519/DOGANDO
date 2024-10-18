@@ -113,8 +113,8 @@
                                         <p> Vous pouvez rentabiliser vos voyages en transportant des colis pour
                                              d'autres personnes, augmentant ainsi vos revenus sans effort supplémentaire.</p>
                                         <div class="overview-btn">
-                                            <a href="service-details.html" class="custom-btn"><i
-                                                    class="icon-btn-icon-v2"></i> Book Now</a>
+                                            <a href="{{route('annonces.voyage')}}" class="custom-btn"><i
+                                                    class="icon-btn-icon-v2"></i> Voyageurs </a>
                                         </div>
                                     </div>
                                 </div>
@@ -132,8 +132,8 @@
                                         <p> Plutôt que de voyager avec des kilos non utilisés,
                                         transporter des biens pour des expéditeurs et maximiser leur charge utile.</p>
                                         <div class="overview-btn">
-                                            <a href="service-details.html" class="custom-btn"><i
-                                                    class="icon-btn-icon-v2"></i> Book Now</a>
+                                            <a href="{{route('annonces.expedition')}}" class="custom-btn"><i
+                                                    class="icon-btn-icon-v2"></i> Expediteurs</a>
                                         </div>
                                     </div>
                                 </div>
@@ -150,8 +150,8 @@
                                         <p>Le recours à des voyageurs pour transporter des colis peut être beaucoup moins cher que les services 
                                         de transport traditionnels, en particulier pour les envois internationaux.</p>
                                         <div class="overview-btn">
-                                            <a href="service-details.html" class="custom-btn"><i
-                                                    class="icon-btn-icon-v2"></i> Book Now</a>
+                                            <a href="{{route('annonces.voyage')}}" class="custom-btn"><i
+                                                    class="icon-btn-icon-v2"></i> Voyageurs</a>
                                         </div>
                                     </div>
                                 </div>
@@ -168,8 +168,8 @@
                                         <p> Si un voyageur se rend rapidement à une destination, l'expéditeur peut envoyer ses biens bien plus 
                                             vite qu'avec les options d'envoi classiques.</p>
                                         <div class="overview-btn">
-                                            <a href="service-details.html" class="custom-btn"><i
-                                                    class="icon-btn-icon-v2"></i> Book Now</a>
+                                            <a href="{{route('annonces.expedition')}}" class="custom-btn"><i
+                                                    class="icon-btn-icon-v2"></i> Expediteurs</a>
                                         </div>
                                     </div>
                                 </div>

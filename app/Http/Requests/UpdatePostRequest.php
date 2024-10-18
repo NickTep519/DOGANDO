@@ -28,8 +28,7 @@ class UpdatePostRequest extends FormRequest
             'price' => ['nullable', 'integer'],
             'city_starts' => ['required', 'string'],
             'city_ends' => ['required', 'string'],
-            'company' => ['nullable', 'string'],
-            'flight_number' => ['nullable', 'string'],
+            'm_transport' => ['nullable', 'string'],
             'type' => ['nullable'],
             'status' => ['nullable']
         ];
