@@ -14,7 +14,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']) ; 
+        $this->middleware(['auth', 'check.user.details'])->except(['index', 'show']) ; 
     }
     /**
      * Display a listing of the resource.
@@ -128,6 +128,6 @@ class PostController extends Controller
     {
         $post->delete() ; 
 
-        return to_route('dashboard.user')->with('success', 'L\'annonce a bien été supprimé') ; 
+        return to_route( $post->type === 1 ? 'dashboard.voyage' : 'dashboard.expedition')->with('success', 'L\'annonce a bien été supprimé') ; 
     }
 }

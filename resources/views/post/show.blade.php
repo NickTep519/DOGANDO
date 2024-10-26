@@ -67,9 +67,17 @@ End Banner
                             </ul>
                         </div>
 
-                        <div class="header-action">
-                            <a href="{{route('conversation.show', $post->user)}}" class="btn--base"><i
-                                    class="icon-btn-icon"></i>Contacter</a>
+                        <div style="display: flex ; gap:20px" >
+                            <div class="header-action">
+                                <a href="{{route('conversation.show', $post->proprietaire)}}" class="btn--base"><i
+                                        class="icon-btn-icon"></i>Contacter</a>
+                            </div>
+
+                            <form action="{{route('offers.create', $post)}}" method="POST">
+                                @csrf
+                                <button  class="btn--base" > Env. une demande </button>
+                            </form>
+                            
                         </div>
                     </div>
                 </div>

@@ -26,6 +26,7 @@ class ConversationController extends Controller
 
     }
 
+   
     public function show(User $user) {
 
         $this->authorize('talkTo', $user)    ; 

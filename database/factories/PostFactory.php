@@ -24,6 +24,7 @@ class PostFactory extends Factory
             'city_starts' => $this->faker->city() ,
             'city_ends' => $this->faker->city() ,
             'm_transport' => $this->faker->randomElement(['avion', 'bataeu']) , 
+            'company' => $this->faker->word(),
             'type' => $this->faker->boolean() ,
             'status' => $this->faker->boolean(75) ,
             'starts_at' => $this->faker->dateTimeBetween('now', '+2 months') ,

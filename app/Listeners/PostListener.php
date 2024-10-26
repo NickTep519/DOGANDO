@@ -34,15 +34,26 @@ class PostListener
             $user->notify(new PostNotification($event->post)) ; 
 
         } else {
-            $post = Post::create($event->data) ; 
-
-            $post->user()->associate(Auth::user()) ; 
-            $post->save() ; 
-
-            $user = Auth::user() ; 
 
             /** @var User $user */
-    
+
+            $user = Auth::user() ; 
+            
+            $post = Post::create($event->data) ; 
+
+            $post->proprietaire()->associate($user) ; 
+            
+            if ($event->data['type']) {
+
+                $post->voyageur()->associate($user) ; 
+
+            } else {
+
+                $post->expediteur()->associate($user) ; 
+            }
+            
+            $post->save() ; 
+           
             $user->notify(new PostNotification($post)) ; 
 
         }

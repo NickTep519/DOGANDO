@@ -31,6 +31,7 @@ class StorePostRequest extends FormRequest
                 'city_starts' => ['required', 'string'],
                 'city_ends' => ['required', 'string'],
                 'm_transport' => ['required', 'string'],
+                'company' => ['string', 'nullable'],
                 'starts_at' => ['required', 'date'],
                 'ends_at' => ['required', 'date'] , 
                 'type' => ['required'],

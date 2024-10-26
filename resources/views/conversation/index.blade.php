@@ -929,7 +929,7 @@
                                         <li>
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-grow-1">
-                                                    <a href="{{route('conversation.show', $consersation_user_o)}}"><h5 class="font-size-14 m-0"> {{$conversation_user_o->name}} </h5></a>
+                                                    <a href="{{route('conversation.show', $conversation_user_o)}}"><h5 class="font-size-14 m-0"> {{$conversation_user_o->name}} </h5></a>
                                                 </div>
                                                 <div class="dropdown">
                                                     <a href="index.html#" class="text-muted dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -1603,12 +1603,7 @@
 
 
 
-
-
-            @yield('chat-user')
-
-
-
+       @yield('chat-user')
 
 
 

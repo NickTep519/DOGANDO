@@ -9,6 +9,17 @@ class DashboardController extends Controller
 {
     public function user() {
 
+        $post_voyage = Post::query()->where('status', 0)
+                            ->where('voyageur_id', auth()->id())
+                            ->latest()->first() ; 
+
+        $post_expedition = Post::query()->where('status', 0)
+                          ->where('proprietaire_id', auth()->id())
+                          ->latest()->first() ;   
+        
+        //dd($post_expedition) ; 
+        
+
         $active = [
             'user' => true,
             'voyage' => false,
@@ -23,9 +34,9 @@ class DashboardController extends Controller
         $notifications = $user->notifaications ; 
 
 
-        $action_voyage = Post::where('type', true)->where('user_id', $user->id)->count() ; 
-        $action_expedition = Post::where('type', false)->where('user_id', $user->id)->count() ;
-        $total_action = Post::where('user_id', $user->id)->count() ; 
+        $action_voyage = Post::where('type', true)->where('proprietaire_id', $user->id)->count() ; 
+        $action_expedition = Post::where('type', false)->where('proprietaire_id', $user->id)->count() ;
+        $total_action = Post::where('proprietaire_id', $user->id)->count() ; 
 
         return view('dashboard.user', [
             'user' => $user,
@@ -33,14 +44,23 @@ class DashboardController extends Controller
             'total_action' => $total_action,
             'action_voyage' => $action_voyage,
             'action_expedition' => $action_expedition,
-            'notifications' => $notifications
+            'notifications' => $notifications,
+            'post_voyage' => $post_voyage,
+            'post_expedition' => $post_expedition
 
         ]) ; 
     }
 
     public function voyage() {
 
-        
+        $post_voyage = Post::query()->where('status', 0)
+                                    ->where('voyageur_id', auth()->id())
+                                    ->latest()->first() ; 
+
+        $post_expedition = Post::query()->where('status', 0)
+                                        ->where('proprietaire_id', auth()->id())
+                                        ->latest()->first() ;  
+
         $active = [
             'user' => false,
             'voyage' => true,
@@ -52,7 +72,7 @@ class DashboardController extends Controller
 
         $user = Auth::user() ; 
 
-        $query = Post::where('user_id', $user->id )->where('type', true) ; 
+        $query = Post::where('proprietaire_id', $user->id )->where('type', true) ; 
         $voyages =  $query->count() ; 
         $posts = $query->orderBy('created_at', 'desc')->get() ; 
 
@@ -60,12 +80,21 @@ class DashboardController extends Controller
             'user' => $user,
             'active' => $active,
             'posts' => $posts, 
-            'voyages' => $voyages
+            'voyages' => $voyages,
+            'post_voyage' => $post_voyage,
+            'post_expedition' => $post_expedition
         ]) ; 
     }
 
     public function expedition() {
 
+        $post_voyage = Post::query()->where('status', 0)
+                                    ->where('voyageur_id', auth()->id())
+                                    ->latest()->first() ; 
+
+        $post_expedition = Post::query()->where('status', 0)
+                                    ->where('proprietaire_id', auth()->id())
+                                    ->latest()->first() ; 
         
         $active = [
             'user' => false,
@@ -78,7 +107,7 @@ class DashboardController extends Controller
 
         $user = Auth::user() ; 
 
-        $query = Post::where('user_id', $user->id )->where('type', false) ; 
+        $query = Post::where('proprietaire_id', $user->id )->where('type', false) ; 
         $expeditions =  $query->count() ; 
         $posts = $query->orderBy('created_at', 'desc')->get() ; 
 
@@ -86,7 +115,9 @@ class DashboardController extends Controller
             'user' => $user,
             'active' => $active,
             'expeditions' => $expeditions,
-            'posts' => $posts
+            'posts' => $posts,
+            'post_voyage' => $post_voyage,
+            'post_expedition' => $post_expedition
         ]) ; 
     }
 
@@ -94,6 +125,13 @@ class DashboardController extends Controller
 
     public function profile() {
 
+        $post_voyage = Post::query()->where('status', 0)
+                                    ->where('voyageur_id', auth()->id())
+                                    ->latest()->first() ; 
+
+        $post_expedition = Post::query()->where('status', 0)
+                                        ->where('proprietaire_id', auth()->id())
+                                        ->latest()->first() ; 
         
         $active = [
             'user' => false,
@@ -108,7 +146,40 @@ class DashboardController extends Controller
 
         return view('dashboard.profile', [
             'user' => $user,
-            'active' => $active
+            'active' => $active,
+            'post_voyage' => $post_voyage,
+            'post_expedition' => $post_expedition
+        ]) ; 
+    }
+
+    public function details(Post $post) {
+
+        $post_voyage = Post::query()->where('status', 0)
+                                    ->where('voyageur_id', auth()->id())
+                                    ->latest()->first() ; 
+
+        $post_expedition = Post::query()->where('status', 0)
+                                        ->where('proprietaire_id', auth()->id())
+                                        ->latest()->first() ; 
+
+        $user = Auth::user() ;
+
+
+        $active = [
+            'user' => false,
+            'voyage' => true,
+            'expedition' => false,
+            'deal' => false,
+            'profile' => false,
+            'setting' => false
+        ] ; 
+        
+        return view('dashboard.details', [
+            'user' => $user,
+            'active' => $active,
+            'post' => $post,
+            'post_voyage' => $post_voyage,
+            'post_expedition' => $post_expedition
         ]) ; 
     }
 

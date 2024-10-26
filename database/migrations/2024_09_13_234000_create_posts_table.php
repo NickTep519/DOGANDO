@@ -21,13 +21,16 @@ return new class extends Migration
             $table->string('city_starts') ;
             $table->string('city_ends') ; 
             $table->string('m_transport')->nullable() ; 
+            $table->string('company')->nullable() ; 
             $table->boolean('type')->default(false) ; 
-            $table->boolean('status')->default(false) ; 
+            $table->boolean('status')->default(null) ; 
             $table->timestamp('starts_at')->nullable() ; 
             $table->timestamp('ends_at')->nullable() ; 
             $table->timestamps();
 
-            $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnDelete() ; 
+            $table->foreignIdFor(User::class, 'proprietaire_id')->nullable()->constrained('users')->cascadeOnDelete() ; 
+            $table->foreignIdFor(User::class, 'expediteur_id')->nullable()->constrained('users')->cascadeOnDelete() ; 
+            $table->foreignIdFor(User::class, 'voyageur_id')->nullable()->constrained('users')->cascadeOnDelete() ; 
         });
     }
 

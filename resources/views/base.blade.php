@@ -83,6 +83,7 @@
                                     <ul class="navbar-nav main-menu ml-auto">
                                         <li class="menu_has_children"><a href="{{route('annonces.voyage')}}"> Voyageurs </a></li>
                                         <li><a href="{{route('annonces.expedition')}}"> Expediteur </a></li>
+                                        <li><a href="{{route('blogs.index')}}">Blog</a></li>
                                         <li class="menu_has_children"><a href="{{route('home')}}"></a></li>
                                         @auth
                                         <li><a href="{{route('dashboard.user')}}"> {{Auth::user()->name}}</a></li>

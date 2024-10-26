@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Post;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -17,6 +18,14 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+
+        $post_voyage = Post::query()->where('status', 0)
+                                    ->where('voyageur_id', auth()->id())
+                                    ->latest()->first() ; 
+
+        $post_expedition = Post::query()->where('status', 0)
+                                        ->where('proprietaire_id', auth()->id())
+                                        ->latest()->first() ; 
           
         $active = [
             'user' => false,
@@ -29,7 +38,9 @@ class ProfileController extends Controller
 
         return view('profile.edit', [
             'user' => $request->user(),
-            'active' => $active
+            'active' => $active,
+            'post_voyage' => $post_voyage,
+            'post_expedition' => $post_expedition
         ]);
     }
 

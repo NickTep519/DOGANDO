@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', config('app.name').'-Annonces')
+@section('title', config('app.name').'-Annonces-expedition')
 
 @section('banner')
 

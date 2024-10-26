@@ -28,6 +28,9 @@
     <link rel="stylesheet" href=" {{asset('css/jquery-ui.css')}} " />
     <link rel="stylesheet" href=" {{asset('css/flag-icon.min.css')}} " />
     <link rel="stylesheet" href=" {{asset('css/style.css')}} " />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
   </head>
   <body class="section-bg">
 
@@ -47,7 +50,6 @@
       </div>
     </div>
     <!-- end cssload-loader -->
-
 
 
     <!-- ================================
@@ -509,15 +511,41 @@
             </div>  <!-- end container-fluid -->
         </div>     <!-- end dashboard-nav -->
 
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        @if ($post_voyage)
+          <input type="hidden" id="post-v-id"  value="{{$post_voyage->id}}">
+        @endif
+
+        @if ($post_expedition)
+          <input type="hidden" id="post-ex-id"  value="{{$post_expedition->id}}">
+          <div id="map" style="height: 300px; width: 100%;"></div>
+        @endif
+
+        
         @yield('content')
 
     </section>
+
     <!-- end dashboard-area -->
+
     <!-- ================================
     END DASHBOARD AREA
-================================= -->
+    ================================= -->
 
     <!-- start scroll top -->
+
+    @php
+      $post_vyg = App\Models\Post::find($post_expedition->id) ; 
+
+      //var_dump($post_vyg->voyageur_id) ; 
+      $user_vyg = App\Models\User::find($post_vyg->voyageur_id) ; 
+
+      //var_dump($user_vyg->name) ; 
+
+
+    @endphp
+
     <div id="back-to-top">
         <i class="la la-angle-up" title="Go top"></i>
     </div>
@@ -537,10 +565,110 @@
     <script src="{{asset('js/animated-headline.js')}}"></script>
     <script src=" {{asset('js/chart.js')}} "></script>
     <script src=" {{asset('js/chart.extension.js')}} "></script>
-    <script src=" {{asset('js/bar-chart.js')}} ">
-      </script
-      <script src="js/jquery.ripples-min.js">
-    </script>
+    <script src=" {{asset('js/bar-chart.js')}} "></script>
+    <script src="{{asset('js/jquery.ripples-min.js') }}"></script>
     <script src=" {{asset('js/main.js')}} "></script>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script>
+
+
+      var map = L.map('map').setView([0, 0], 8); // centre par défaut
+      var marker = null;
+
+     // Ajouter la couche OpenStreetMap
+     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: ' {{$user_vyg->name}} &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+     }).addTo(map);
+
+    function updateMarker(lat, lng) {
+
+      if (marker) {
+        marker.setLatLng([lat, lng]);
+      } else {
+        marker = L.marker([lat, lng]).addTo(map);
+      } 
+
+      map.setView([lat, lng], 24); // zoom sur la position du colis
+    }
+
+    // Appel AJAX pour obtenir la dernière position du colis toutes les X secondes
+    setInterval(function() {
+
+      let postId = document.getElementById('post-ex-id').value ;
+
+      fetch(`/tracking/${postId}/latest`)
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                updateMarker(data.latitude, data.longitude);
+            }
+        });
+    }, 10000); // toutes les 10 secondes
+
+
+
+    if (navigator.geolocation) {
+
+      navigator.geolocation.watchPosition(function(position) {
+
+      let latitude = position.coords.latitude ;
+      let longitude = position.coords.longitude ;
+      let postId = document.getElementById('post-v-id').value ;
+
+      fetch('/tracking/update', {
+        method: 'POST',   
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        } ,
+        body: JSON.stringify({
+          latitude: latitude,
+          longitude: longitude,
+          post_id: postId
+      })
+    }).then(response => response.json())
+      .then(data => console.log(data));
+    });
+
+    } else {
+
+      alert("La géolocalisation n'est pas supportée par ce navigateur.") ;
+
+    }
+
+    // Appel AJAX pour le checkbox des status
+
+    $(document).ready(function () {
+    $('#myCheckbox').on('change', function () {
+        let isChecked = $(this).is(':checked');
+        let itemId = $(this).data('id');
+
+        $.ajax({
+            url: '/checkbox/update',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') 
+            },
+            data: JSON.stringify({ // Envoyer les données sous forme de JSON
+                id: itemId, 
+                checked: isChecked
+            }),
+            success: function (response) {
+                console.log('Statut de la checkbox mis à jour avec succès');
+            },
+            error: function (error) {
+                console.error('Erreur lors de la mise à jour de la checkbox');
+            }
+        });
+    });
+});
+
+
+    </script>
+
+
   </body>
 </html>

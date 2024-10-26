@@ -29,6 +29,7 @@ class UpdatePostRequest extends FormRequest
             'city_starts' => ['required', 'string'],
             'city_ends' => ['required', 'string'],
             'm_transport' => ['nullable', 'string'],
+            'company' => ['nullable', 'string'],
             'type' => ['nullable'],
             'status' => ['nullable']
         ];

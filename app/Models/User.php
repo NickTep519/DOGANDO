@@ -60,6 +60,21 @@ class User extends Authenticatable
         return $this->hasMany(Message::class, 'from_id') ; 
     }
 
+    public function trackingPostions() {
+
+        return $this->hasMany(TrackingPosition::class) ; 
+    }
+
+    public function offers() {
+
+        return $this->hasMany(Offer::class, 'voyageur_id') ; 
+    }
+
+    public function blogs() {
+
+        return $this->hasMany(Blog::class) ; 
+    }
+
 
     public function lastMessage() {
 

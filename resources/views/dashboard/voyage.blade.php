@@ -62,7 +62,7 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Type</th>
+                        <th scope="col">M Trans</th>
                         <th scope="col">Kilos (kg)</th>
                         <th scope="col">Prix (F CFA)</th>
                         <th scope="col"> Dates (D - A)</th>
@@ -75,11 +75,9 @@
                     <tbody>
 
                       @forelse ($posts as $post)
-
                       <tr>
                         <th scope="row">
-                          <i class="la la-plane me-1 font-size-18"></i
-                          >Flight
+                          <i class="la la-plane me-1 font-size-18"></i> {{$post->m_transport}}
                         </th>
                         <td>
                           <div class="table-content">
@@ -94,22 +92,27 @@
                           @if ($post->status)
                             <span class="badge text-bg-success py-1 px-2">Terminé</span>     
                           @else
-                            <span class="badge text-bg-info py-1 px-2" >En cours..</span>    
+                            @if ($post->status === NULL)
+                                ---
+                            @else
+                                <span class="badge text-bg-info py-1 px-2" >En cours..</span> 
+                                <span class="form-switch" > 
+                                  <input class="form-check-input" type="checkbox" role="switch" id="myCheckbox" data-id="{{ $post->id }}" {{ $post->status ? 'checked' : '' }}>
+                                </span> 
+                            @endif
                           @endif
                         </td>
                         <td>
                           <div class="table-content">
-
-                            <a href="{{route('posts.edit', $post)}}" class="theme-btn theme-btn-small" > Editer </a>
-                            <form action="{{route('posts.destroy', $post)}}" method="POST" >
-                              @csrf
-                              @method('delete')
-                              <button class="theme-btn theme-btn-small">
-                                Suprrimer
-                              </button>
-                            </form>
-                          </div>
-                          
+                            <a
+                              href="{{route('dashboard.posts.details', $post)}}"
+                              class="theme-btn theme-btn-small"
+                              data-bs-toggle="tooltip"
+                              data-placement="top"
+                              title="View"
+                              ><i class="la la-eye"></i
+                            ></a>
+                          </div> 
                         </td>
                       </tr>
                           

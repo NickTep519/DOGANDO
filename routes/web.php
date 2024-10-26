@@ -1,12 +1,17 @@
 <?php
 
-use App\Http\Controllers\AnnoncesController;
-use App\Http\Controllers\ConversationController;
-use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnnoncesController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CheckboxController;
+use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ConversationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +26,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home') ;
 
-Route::prefix('/dashboard')->middleware(['auth', 'verified'])->name('dashboard.')->group(function() {
+Route::prefix('/dashboard')->middleware(['auth','check.user.details', 'verified'])->name('dashboard.')->group(function() {
     Route::get('/', [DashboardController::class, 'user'] )->name('user') ; 
     Route::get('/voyage', [DashboardController::class, 'voyage'])->name('voyage') ; 
     Route::get('expeditions/', [DashboardController::class, 'expedition'])->name('expedition') ; 
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile') ; 
-
+    Route::get('/posts/{post}/details', [DashboardController::class, 'details'])->name('posts.details') ; 
 } ) ;  
+
+Route::post('/checkbox/update', [CheckboxController::class, 'updateCheckboxStatus'])->name('checkbox.update');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/tracking/update', [TrackingController::class, 'updatePosition']);
+    Route::get('/tracking/{post_id}/latest', [TrackingController::class, 'getLatestPosition']);
+});
 
 
 Route::middleware('auth')->group(function () {
@@ -42,7 +54,10 @@ Route::prefix('conversations')->middleware('auth')->name('conversation.')->group
     Route::post('/{user}',[ConversationController::class, 'store'] ) ; 
 }) ;
 
+
 Route::resource('posts', PostController::class)->except(['index', 'show']) ; 
+
+Route::resource('blogs', BlogController::class) ; 
 
 Route::prefix('posts')->name('annonces.')->group(function(){
     Route::get('/annonces-voyageurs', [AnnoncesController::class, 'voyage'])->name('voyage') ; 
@@ -53,5 +68,13 @@ Route::get('posts/annonces/{slug}-{post}', [AnnoncesController::class, 'show'])-
     'slug' => '[a-z0-9\-]+',
     'post' => '[0-9]+'
 ]) ; 
+
+Route::prefix('/posts')->name('offers.')->middleware('auth')->group(function() {
+    Route::post('/{post}/offers', [OfferController::class, 'createOffer'])->name('create');
+    Route::get('/{post}/offers', [OfferController::class, 'showOffersForPost'])->name('show');
+    Route::post('/{offer}/status', [OfferController::class, 'updateOfferStatus'])->name('update.status');
+    
+} ) ; 
+
 
 require __DIR__.'/auth.php';
