@@ -16,9 +16,9 @@ class OfferController extends Controller
             return redirect()->back()->with('success', 'Vous ne pouvez envoyé une demande à vous même') ;
         }
 
-        $offer = Offer::create([
-            'status' => 'pending',
-        ]);
+        $offer = Offer::updateOrCreate( 
+            ['post_id' => $post->id, 'voyageur_id' => auth()->id() ], 
+            [ 'status' => 'pending' ]);
 
             /** @var Offer $offer */
 
@@ -54,9 +54,10 @@ class OfferController extends Controller
 
         /** @var Post $post */
         
-        $offers = $post->offers() ; 
+        $offers = $post->offers()->where('status', 'pending' )->get() ; 
 
         return view('offers.index', [
+            'offers' => $offers,
             'active' => $active,
             'post' => $post,
             'user' => $user, 
@@ -74,7 +75,7 @@ class OfferController extends Controller
         if ($request->status == 'accepted') {
 
             // Refuse toutes les autres offres pour le même colis
-            Offer::where('parcel_id', $offer->parcel_id)
+            Offer::where('post_id', $offer->post_id)
                 ->where('id', '!=', $offer->id)
                 ->update(['status' => 'rejected']);
 
@@ -82,7 +83,7 @@ class OfferController extends Controller
             $offer->post->update(['voyageur_id' => $offer->voyageur_id]);
         }
 
-        return response()->json(['message' => 'Statut de l\'offre mis à jour.']);
+        return redirect()->back()->with('success','Vous avez approuvé une demande.') ;
     }
 
 

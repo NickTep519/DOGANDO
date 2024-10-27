@@ -200,6 +200,7 @@
                               <label for="title" class="label-text">Titre : </label>
                               <div class="form-group">
                                 <input
+                                  {{$post->exists ? 'readonly' : '' }}
                                   name="title"
                                   id="title"
                                   value="{{old('title', $post->title)}}"
@@ -220,6 +221,7 @@
                               <label for="description" class="label-text">Description : </label>
                               <div class="form-group">
                                 <input
+                                  {{$post->exists ? 'readonly' : '' }}
                                   name="description"
                                   id="description"*
                                   value="{{old('description', $post->description)}}"
@@ -240,6 +242,8 @@
                               <label for="kg" class="label-text">Kilos : </label>
                               <div class="form-group">
                                 <input
+                                  {{$post->exists ? 'readonly' : '' }}
+
                                   name="kg"
                                   id="kg"
                                   value="{{old('kg', $post->kg)}}"
@@ -261,6 +265,8 @@
                               <label for="price" class="label-text">Prix/kg : </label>
                               <div class="form-group">
                                 <input
+                                  {{$post->exists ? 'readonly' : '' }}
+
                                   name="price"
                                   id="price"
                                   value="{{old('price', $post->price)}}"
@@ -308,6 +314,8 @@
                               <div class="form-group">
                                 <span class="la la-map-marker form-icon"></span>
                                 <input
+                                  {{$post->exists ? 'readonly' : '' }}
+
                                   name="city_starts"
                                   id="city_starts"
                                   value="{{old('city_starts', $post->city_starts)}}"
@@ -330,6 +338,8 @@
                               <div class="form-group">
                                 <span class="la la-map-marker form-icon"></span>
                                 <input
+                                  {{$post->exists ? 'readonly' : '' }}
+
                                   name="city_ends"
                                   id="city_ends"
                                   value="{{old('city_ends', $post->city_ends)}}"
@@ -344,7 +354,30 @@
                                 @enderror
                               </div>
                             </div>
-                          </div>
+                          </div>    <!-- end col-lg-3 -->
+
+                          <div class="col-lg-6 pe-0">
+                            <div class="input-box">
+                              <label for="company" class="label-text">Compagnie : </label>
+                              <div class="form-group">
+                                <span class="la la-map-marker form-icon"></span>
+                                <input
+                                  name="company"
+                                  id="company"
+                                  value="{{old('company', $post->company)}}"
+                                  class="form-control"
+                                  type="text"
+                                  placeholder="Compagnie"
+                                />
+                                @error('company')
+                                    <div class="alert alert-danger" >
+                                      {{$message}}
+                                    </div>
+                                @enderror
+                              </div>
+                            </div>
+                          </div>     <!-- end col-lg-3 -->
+
                           <div class="col-lg-6 pe-0">
                             <div class="input-box">
                               <label for="starts_at" class="label-text">Date depart : </label>
@@ -458,6 +491,8 @@
                               <label for="title" class="label-text">Titre</label>
                               <div class="form-group">
                                 <input
+                                  {{$post->exists ? 'readonly' : '' }}
+
                                   name="title"
                                   id="title"
                                   value="{{old('title', $post->title)}}"
@@ -478,6 +513,8 @@
                               <label for="description" class="label-text">Description</label>
                               <div class="form-group">
                                 <input
+                                  {{$post->exists ? 'readonly' : '' }}
+
                                   name="description"
                                   id="description"*
                                   value="{{old('description', $post->description)}}"
@@ -498,6 +535,8 @@
                               <label for="kg" class="label-text">Kilos</label>
                               <div class="form-group">
                                 <input
+                                  {{$post->exists ? 'readonly' : '' }}
+
                                   name="kg"
                                   id="kg"
                                   value="{{old('kg', $post->kg)}}"
@@ -580,6 +619,8 @@
                               <div class="form-group">
                                 <span class="la la-map-marker form-icon"></span>
                                 <input
+                                {{$post->exists ? 'readonly' : '' }}
+
                                   name="city_ends"
                                   id="city_ends"
                                   value="{{old('city_ends', $post->city_ends)}}"

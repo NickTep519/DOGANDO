@@ -108,7 +108,7 @@
                       data-bs-target="#modalPopup"
                     > Supprimer </button>
                   </form>
-
+                  
                   <a
                     href="{{route('offers.show', $post)}}"
                     class="theme-btn theme-btn-small"

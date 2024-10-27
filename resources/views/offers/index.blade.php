@@ -24,7 +24,7 @@
                         <ul class="list-items">
                             <li><a href="{{route('home')}}" class="text-white">Home</a></li>
                             <li>Dashboard</li>
-                            <li>Booking</li>
+                            <li>Demandes</li>
                         </ul>
                     </div>         <!-- end breadcrumb-list -->
                 </div>          <!-- end col-lg-6 -->
@@ -41,21 +41,14 @@
                         <div class="form-title-wrap">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h3 class="title">Demandes</h3>
-                                <div class="select-contain select2-container-wrapper">
-                                    <select class="select-contain-select">
-                                        <option value="1">Any Status</option>
-                                        <option value="2">Approved</option>
-                                        <option value="3">Pending</option>
-                                        <option value="4">Cancelled</option>
-                                    </select>
-                                </div>
+                                
                             </div>
                         </div>
 
                         
                         <div class="form-content pb-2">
 
-                            @forelse ($post->offers as $offer)
+                            @forelse ($offers as $offer)
 
                             <div class="card-item card-item-list card-item--list">
                                
@@ -86,20 +79,20 @@
                                 <div class="action-btns" style="display: flex ; gap:10px" >
                                     <form action="{{route('offers.update.status', $offer)}}" method="POST" >
                                         @csrf
-                                        <input type="hidden" value="accepted" >
+                                        <input type="hidden" name="status" value="accepted" >
                                         <button class="theme-btn theme-btn-small me-2" > Approuver </button>
                                     </form>
 
                                     <form action="{{route('offers.update.status', $offer)}}" method="POST" >
                                         @csrf
-                                        <input type="hidden" value="rejected" >
+                                        <input type="hidden" name="status" value="rejected" >
                                         <button  class="theme-btn theme-btn-small" > Rejeter </button>
                                     </form>
                                 </div>
 
                             </div>       <!-- end card-item -->    
                             @empty
-                            <p>Il n'y a encore aucune demande pour cette annonce. </p>    
+                            <p>Il n'y a aucune demande en attente pour cette annonce. </p>    
                             @endforelse
 
                             

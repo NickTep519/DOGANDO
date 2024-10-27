@@ -74,7 +74,7 @@ class DashboardController extends Controller
 
         $query = Post::where('proprietaire_id', $user->id )->where('type', true) ; 
         $voyages =  $query->count() ; 
-        $posts = $query->orderBy('created_at', 'desc')->get() ; 
+        $posts = $query->orderBy('created_at', 'desc')->paginate(10) ; 
 
         return view('dashboard.voyage', [
             'user' => $user,
@@ -109,7 +109,7 @@ class DashboardController extends Controller
 
         $query = Post::where('proprietaire_id', $user->id )->where('type', false) ; 
         $expeditions =  $query->count() ; 
-        $posts = $query->orderBy('created_at', 'desc')->get() ; 
+        $posts = $query->orderBy('created_at', 'desc')->paginate(10) ; 
 
         return view('dashboard.expedition', [
             'user' => $user,
@@ -164,11 +164,19 @@ class DashboardController extends Controller
 
         $user = Auth::user() ;
 
+       if ($post->type) {
+            $expedition = false ; 
+            $voyage = true ; 
+       } else {
+            $expedition = true ; 
+            $voyage = false ;
+       }
+       
 
         $active = [
             'user' => false,
-            'voyage' => true,
-            'expedition' => false,
+            'voyage' => $voyage,
+            'expedition' => $expedition,
             'deal' => false,
             'profile' => false,
             'setting' => false

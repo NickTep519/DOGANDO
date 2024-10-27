@@ -309,20 +309,20 @@
             </li>
             <li >
               <a href="{{route('posts.create')}}"
-                ><i class="la la-shopping-cart me-2 text-color"></i>Ajouter A</a
+                ><i class="la la-shopping-cart me-2 text-color"></i>Ajouter</a
               >
             </li>
             <li @class(['', 'page-active' => $active['voyage']]) >
               <a href="{{route('dashboard.voyage')}}"
-                ><i class="la la-shopping-cart me-2 text-color"></i> Annonces V</a
+                ><i class="la la-shopping-cart me-2 text-color"></i> Voyages</a
               >
             </li>
             <li @class(['', 'page-active' => $active['expedition']]) >
                 <a href="{{route('dashboard.expedition')}}"
-                  ><i class="la la-shopping-cart me-2 text-color"></i> Annonces Ex</a
+                  ><i class="la la-shopping-cart me-2 text-color"></i> Expeditions</a
                 >
             </li>
-            <li @class(['', 'page-active' => $active['expedition']]) >
+            <li >
               <a href="{{route('conversation.index')}}"
                 > Messages</a
               >
@@ -466,7 +466,7 @@
                                                     >
                                                         <div class="msg-body">
                                                             <div class="msg-content">
-                                                                <h3 class="title"> <i class="la la-shopping-cart me-2"></i>Annonces V </h3>
+                                                                <h3 class="title"> <i class="la la-shopping-cart me-2"></i> Voyages </h3>
                                                             </div>
                                                         </div>   <!-- end msg-body -->
                                                     </a>
@@ -476,7 +476,7 @@
                                                     >
                                                         <div class="msg-body">
                                                             <div class="msg-content">
-                                                                <h3 class="title"> <i class="la la-shopping-cart me-2"></i>Annonces Ex </h3>
+                                                                <h3 class="title"> <i class="la la-shopping-cart me-2"></i> Expeditions </h3>
                                                             </div>
                                                         </div>    <!-- end msg-body -->
                                                     </a>

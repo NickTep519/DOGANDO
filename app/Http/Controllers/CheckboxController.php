@@ -10,8 +10,9 @@ class CheckboxController extends Controller
     public function updateCheckboxStatus(Request $request){
 
         $post = Post::find($request->id);
+
         if ($post) {
-            $post->status = $request->checked;
+            $post->status = $request->checked ;
             $post->save();
 
             return response()->json(['success' => 'Statut de la checkbox mis à jour']);

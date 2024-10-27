@@ -45,28 +45,25 @@
                   class="d-flex align-items-center justify-content-between"
                 >
                   <div>
-                    <h3 class="title">Mes Expeditions</h3>
-                    <p class="font-size-14">Showing 1 to 7 of 17 entries</p>
+                    <h3 class="title">Mes expeditions</h3>
                   </div>
                   <span
-                    >Total Expeditions
-                    <strong class="color-text"> {{$expeditions}} </strong></span
+                    >Mes Voyages
+                    <strong class="color-text">{{ $expeditions }}</strong></span
                   >
                 </div>
               </div>
-              <div>
-                <a href="{{route('posts.create')}}" class="theme-btn theme-btn-small" > Ajoutez </a>
-              </div>
+             
               <div class="form-content">
                 <div class="table-form table-responsive">
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Type</th>
+                        <th scope="col">M Trans</th>
                         <th scope="col">Kilos (kg)</th>
                         <th scope="col">Prix (F CFA)</th>
+                        <th scope="col"> Dates (D - A)</th>
                         <th scope="col">Villes (D - A)</th>
-                        <th scope="col">Compagnie</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
@@ -74,11 +71,9 @@
                     <tbody>
 
                       @forelse ($posts as $post)
-
                       <tr>
                         <th scope="row">
-                          <i class="la la-plane me-1 font-size-18"></i
-                          >Flight
+                          <i class="la la-plane me-1 font-size-18"></i> {{$post->m_transport}}
                         </th>
                         <td>
                           <div class="table-content">
@@ -86,36 +81,40 @@
                           </div>
                         </td>
                         <td> {{$post->price}} </td>
+                        <td>{{$post->starts_at->translatedFormat('d/m/y') }} - {{$post->ends_at->translatedFormat('d/m/y')}}</td>
                         <td> {{ $post->city_starts }} - {{$post->city_ends}} </td>
-                        <td> {{$post->company}} </td>
                         <td>
                           @if ($post->status)
                             <span class="badge text-bg-success py-1 px-2">Terminé</span>     
                           @else
-                            <span class="badge text-bg-info py-1 px-2" >En cours..</span>    
+                            @if ($post->status === NULL)
+                                ---
+                            @else
+                                <span class="badge text-bg-info py-1 px-2" >En cours..</span> 
+                                <span class="form-switch" > 
+                                  <input class="form-check-input" type="checkbox" role="switch" id="myCheckbox" data-id="{{ $post->id }}" {{ $post->status ? 'checked' : '' }}>
+                                </span> 
+                            @endif
                           @endif
                         </td>
                         <td>
                           <div class="table-content">
-
-                            <a href="{{route('posts.edit', $post)}}" class="theme-btn theme-btn-small" > Editer </a>
-                            <form action="{{route('posts.destroy', $post)}}" method="POST" >
-                              @csrf
-                              @method('delete')
-                              <button class="theme-btn theme-btn-small">
-                                Suprrimer
-                              </button>
-                            </form>
-
-                            
-                          </div>
-                          
+                            <a
+                              href="{{route('dashboard.posts.details', $post)}}"
+                              class="theme-btn theme-btn-small"
+                              data-bs-toggle="tooltip"
+                              data-placement="top"
+                              title="View"
+                              ><i class="la la-eye"></i
+                            ></a>
+                          </div> 
                         </td>
                       </tr>
                           
                       @empty
                          <P>Vous n'avez encore effectué aucun voyage</P> 
                       @endforelse
+                    </table>
                 </div>
               </div>
             </div>
@@ -127,12 +126,54 @@
         <div class="row">
           <div class="col-lg-12">
             <nav aria-label="Page navigation example">
-              
+              <ul class="pagination">
+                <li class="page-item">
+                  <a
+                    class="page-link page-link-nav"
+                    href="{{$posts->previousPageUrl()}}"
+                    aria-label="Previous"
+                  >
+                    <span aria-hidden="true"
+                      ><i class="la la-angle-left"></i
+                    ></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+    
+                @for ($i = 1; $i < $posts->lastPage(); $i++)
+    
+                  @if ($posts->currentPage() === $i)
+                  <li class="page-item active">
+                    <a class="page-link page-link-nav" href="{{$posts->url($i)}}"
+                      > {{$i}} <span class="sr-only">(current)</span></a
+                    >
+                  </li>   
+                  @else
+                  <li class="page-item">
+                    <a class="page-link page-link-nav" href="{{$posts->url($i)}}">{{$i}}</a>
+                  </li>    
+                  @endif    
+    
+                @endfor
+               
+                <li class="page-item">
+                  <a
+                    class="page-link page-link-nav"
+                    href="{{$posts->nextPageUrl()}}"
+                    aria-label="Next"
+                  >
+                    <span aria-hidden="true"
+                      ><i class="la la-angle-right"></i
+                    ></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
             </nav>
           </div>
           <!-- end col-lg-12 -->
         </div>
         <!-- end row -->
-    
+       
 
 @endsection

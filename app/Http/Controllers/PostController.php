@@ -59,9 +59,6 @@ class PostController extends Controller
             'city_starts' => 'COTONOU',
             'city_ends' => 'YAOUNDE',
             'company' => 'Air France',
-            'flight_number' => 1600,
-            'type' => 1,
-            'status' => 1,
             'starts_at' => now(),
             'ends_at' => now()->month(11)
         ]) ; 
