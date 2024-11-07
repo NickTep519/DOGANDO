@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="TechyDevs" />
@@ -55,12 +55,6 @@
 ================================= -->
     <section class="hero-wrapper">
       <div class="hero-box hero-bg">
-        <span class="line-bg line-bg1"></span>
-        <span class="line-bg line-bg2"></span>
-        <span class="line-bg line-bg3"></span>
-        <span class="line-bg line-bg4"></span>
-        <span class="line-bg line-bg5"></span>
-        <span class="line-bg line-bg6"></span>
         <div class="container">
           <div class="row">
             <div class="col-lg-10 mx-auto responsive--column-l">
@@ -191,6 +185,7 @@
                       <div class="contact-form-action">
                         <form action="{{route($post->exists ? 'posts.update' : 'posts.store', $post)}}" method="POST" class="row align-items-center">
                           @csrf
+
                           @if ($post->exists)
                               @method('PUT')
                           @endif
@@ -310,19 +305,22 @@
 
                           <div class="col-lg-6 pe-0">
                             <div class="input-box">
-                              <label for="city_starts" class="label-text">Ville de depart : </label>
+                              <label for="cityInput" class="label-text">Ville de depart : </label>
                               <div class="form-group">
                                 <span class="la la-map-marker form-icon"></span>
                                 <input
                                   {{$post->exists ? 'readonly' : '' }}
 
                                   name="city_starts"
-                                  id="city_starts"
                                   value="{{old('city_starts', $post->city_starts)}}"
-                                  class="form-control"
+                                  class="form-control cityInput"
                                   type="text"
-                                  placeholder=""
+                                  placeholder="Entrez une ville" 
+                                  autocomplete="off"
                                 />
+
+                                <ul id="suggestions" style="list-style: none; padding: 0; margin-top: 5px; background-color: #fff; border: 1px solid #fff; max-width: 300px;"></ul>
+
                                 @error('city_starts')
                                     <div class="alert alert-danger" >
 
@@ -343,10 +341,12 @@
                                   name="city_ends"
                                   id="city_ends"
                                   value="{{old('city_ends', $post->city_ends)}}"
-                                  class="form-control"
+                                  class="form-control cityInput"
                                   type="text"
                                   placeholder="City or airport"
                                 />
+                                <ul id="suggestions" style="list-style: none; padding: 0; margin-top: 5px; background-color: #fff; border: 1px solid #fff; max-width: 300px;"></ul>
+
                                 @error('city_ends')
                                     <div class="alert alert-danger" >
                                       {{$message}}
@@ -600,10 +600,14 @@
                                   name="city_starts"
                                   id="city_starts"
                                   value="{{old('city_starts', $post->city_starts)}}"
-                                  class="form-control"
+                                  class="form-control cityInput"
                                   type="text"
                                   placeholder=""
                                 />
+
+                                <ul id="suggestions" style="list-style: none; padding: 0; margin-top: 5px; background-color: #fff; border: 1px solid #fff; max-width: 300px;"></ul>
+
+
                                 @error('city_starts')
                                   <div class="alert alert-danger" >
                                     {{$message}}
@@ -624,10 +628,13 @@
                                   name="city_ends"
                                   id="city_ends"
                                   value="{{old('city_ends', $post->city_ends)}}"
-                                  class="form-control"
+                                  class="form-control cityInput"
                                   type="text"
                                   placeholder="City or airport"
                                 />
+
+                                <ul id="suggestions" style="list-style: none; padding: 0; margin-top: 5px; background-color: #fff; border: 1px solid #fff; max-width: 300px;"></ul>
+
                                 @error('city_ends')
                                   <div class="alert alert-danger" >
                                     {{$message}}
@@ -669,7 +676,45 @@
     END HERO-WRAPPER AREA
 ================================= -->
 
+<script>
+  // Sélectionner tous les champs avec la classe 'cityInput'
+  const cityInputs = document.querySelectorAll('.cityInput');
 
+  cityInputs.forEach(cityInput => {
+      const suggestions = cityInput.nextElementSibling; // Récupère le ul juste après le champ
+
+      cityInput.addEventListener('input', async function() {
+          const query = cityInput.value.trim();
+          if (query.length > 2) { // Commencer la recherche après 2 caractères
+              try {
+                  const response = await fetch(`https://api.locationiq.com/v1/autocomplete.php?key=pk.86921e70717280748f0c71cabd9526ce&q=${query}&limit=5&format=json`);
+                  const data = await response.json();
+                  showSuggestions(data, suggestions, cityInput);
+              } catch (error) {
+                  console.error("Erreur lors de la récupération des données:", error);
+              }
+          } else {
+              suggestions.innerHTML = ''; // Vider les suggestions si l'utilisateur efface le texte
+          }
+      });
+  });
+
+  function showSuggestions(cities, suggestionsContainer, inputField) {
+      suggestionsContainer.innerHTML = ''; // Vider la liste des suggestions
+      cities.forEach(city => {
+          if (city.type === "city") { // Filtrer pour ne garder que les villes
+              const li = document.createElement('li');
+              li.textContent = `${city.display_name.split(",")[0]} (${city.address.country})`;
+              li.style.cursor = 'pointer';
+              li.addEventListener('click', () => {
+                  inputField.value = `${city.display_name.split(",")[0]} (${city.address.country})`;
+                  suggestionsContainer.innerHTML = ''; // Effacer les suggestions une fois sélectionnée
+              });
+              suggestionsContainer.appendChild(li);
+          }
+      });
+  }
+</script>
   
     <!-- Template JS Files -->
     <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
