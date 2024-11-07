@@ -34,10 +34,12 @@ class OfferController extends Controller
     public function showOffersForPost(Post $post) {
 
         $post_voyage = Post::query()->where('status', 0)
+                                    ->where('type', 1)
                                     ->where('voyageur_id', auth()->id())
                                     ->latest()->first() ; 
 
         $post_expedition = Post::query()->where('status', 0)
+                                        ->where('type', 0)
                                         ->where('proprietaire_id', auth()->id())
                                         ->latest()->first() ; 
 

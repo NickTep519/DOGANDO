@@ -10,12 +10,14 @@ class DashboardController extends Controller
     public function user() {
 
         $post_voyage = Post::query()->where('status', 0)
+                            ->where('type', 1)
                             ->where('voyageur_id', auth()->id())
                             ->latest()->first() ; 
 
         $post_expedition = Post::query()->where('status', 0)
-                          ->where('proprietaire_id', auth()->id())
-                          ->latest()->first() ;   
+                        ->where('type', 0)
+                        ->where('proprietaire_id', auth()->id())
+                        ->latest()->first() ;   
         
         //dd($post_expedition) ; 
         
@@ -34,8 +36,8 @@ class DashboardController extends Controller
         $notifications = $user->notifaications ; 
 
 
-        $action_voyage = Post::where('type', true)->where('proprietaire_id', $user->id)->count() ; 
-        $action_expedition = Post::where('type', false)->where('proprietaire_id', $user->id)->count() ;
+        $action_voyage = Post::where('type', 1)->where('proprietaire_id', $user->id)->count() ; 
+        $action_expedition = Post::where('type', 0)->where('proprietaire_id', $user->id)->count() ;
         $total_action = Post::where('proprietaire_id', $user->id)->count() ; 
 
         return view('dashboard.user', [
@@ -54,12 +56,16 @@ class DashboardController extends Controller
     public function voyage() {
 
         $post_voyage = Post::query()->where('status', 0)
+                                    ->where('type', 1)
                                     ->where('voyageur_id', auth()->id())
                                     ->latest()->first() ; 
 
         $post_expedition = Post::query()->where('status', 0)
+                                        ->where('type', 0)
                                         ->where('proprietaire_id', auth()->id())
                                         ->latest()->first() ;  
+
+        //dd($post_expedition) ; 
 
         $active = [
             'user' => false,
@@ -72,7 +78,7 @@ class DashboardController extends Controller
 
         $user = Auth::user() ; 
 
-        $query = Post::where('proprietaire_id', $user->id )->where('type', true) ; 
+        $query = Post::where('proprietaire_id', $user->id )->where('type', 1) ; 
         $voyages =  $query->count() ; 
         $posts = $query->orderBy('created_at', 'desc')->paginate(10) ; 
 
@@ -89,10 +95,12 @@ class DashboardController extends Controller
     public function expedition() {
 
         $post_voyage = Post::query()->where('status', 0)
+                                    ->where('type', 1)
                                     ->where('voyageur_id', auth()->id())
                                     ->latest()->first() ; 
 
         $post_expedition = Post::query()->where('status', 0)
+                                    ->where('type', 0)
                                     ->where('proprietaire_id', auth()->id())
                                     ->latest()->first() ; 
         
@@ -126,10 +134,12 @@ class DashboardController extends Controller
     public function profile() {
 
         $post_voyage = Post::query()->where('status', 0)
+                                    ->where('type', 1)
                                     ->where('voyageur_id', auth()->id())
                                     ->latest()->first() ; 
 
         $post_expedition = Post::query()->where('status', 0)
+                                        ->where('type', 0)
                                         ->where('proprietaire_id', auth()->id())
                                         ->latest()->first() ; 
         
@@ -155,10 +165,12 @@ class DashboardController extends Controller
     public function details(Post $post) {
 
         $post_voyage = Post::query()->where('status', 0)
+                                    ->where('type', 1)
                                     ->where('voyageur_id', auth()->id())
                                     ->latest()->first() ; 
 
         $post_expedition = Post::query()->where('status', 0)
+                                        ->where('type', 0)
                                         ->where('proprietaire_id', auth()->id())
                                         ->latest()->first() ; 
 

@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', config('app.name').'-Annonces-expedition')
+@section('title', config('app.name').'-Annonces')
 
 @section('banner')
 
@@ -13,12 +13,12 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-xl-12 text-center">
                 <div class="banner-content">
-                    <h1 class="title">Annonces</h1>
+                    <h1 class="title">Trajets</h1>
                     <div class="breadcrumb-area">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html"> {{config('app.name')}} </a></li>
-                                <li class="breadcrumb-item active" aria-current="page"> Annonces Expediteur</li>
+                                <li class="breadcrumb-item active" aria-current="page"> Trajets</li>
                             </ol>
                         </nav>
                     </div>
@@ -127,48 +127,33 @@ End Banner
 
                         @foreach ($posts as $post)
                             
-                            @if (  $loop->iteration >= 5)
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-30"  >
-                                <div class="blog-item">
-                                    <div class="blog-thumb">
-                                        <img src=" {{asset('assets/images/blog/blog-1.png')}} " alt="blog">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-30"  >
+                            <div class="blog-item">
+
+                                @if ($post->type == 1)
+                                <div class="blog-thumb">
+                                    <img src=" {{asset('assets/images/blog/voyage.png')}} " alt="blog">
+                                </div>    
+                                @else
+                                <div class="blog-thumb">
+                                    <img src=" {{asset('assets/images/blog/expedition.png')}} " alt="blog">
+                                </div>
+                                @endif
+                                
+                                <div class="blog-content">
+                                    <div class="blog-post-meta">
+                                        <span class="date"> {{$post->created_at->translatedFormat('d M Y')}} </span>
+                                        <span class="comment"> {{$post->kg}} kg </span>
                                     </div>
-                                    <div class="blog-content">
-                                        <div class="blog-post-meta">
-                                            <span class="date"> {{$post->created_at->translatedFormat('d M Y')}} </span>
-                                            <span class="comment"> {{$post->kg}} kg </span>
-                                        </div>
-                                        <h3 class="title"><a href="{{ route('posts.show', [$post->slug(), $post] ) }}">  {{ $post->title }} </a></h3>
-                                        <p> {{ $post->description }} </p>
-                                        <div class="blog-btn">
-                                            <a href="{{ route('posts.show', [$post->slug(), $post] ) }}">Voir plus <i
-                                                    class="icon-Group-2361 ml-2"></i></a>
-                                        </div>
+                                    <h3 class="title"><a href="{{ route('posts.show', [$post->slug(), $post] ) }}">  {{ $post->city_starts }} - {{ $post->city_ends }} </a></h3>
+                                    <p> {{ $post->description }} </p>
+                                    <div class="blog-btn">
+                                        <a href="{{ route('posts.show', [$post->slug(), $post] ) }}">Voir plus <i
+                                                class="icon-Group-2361 ml-2"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            
-                            @else
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-30"  >
-                                <div class="blog-item">
-                                    <div class="blog-thumb">
-                                        <img src=" {{asset('assets/images/blog/blog-1.png')}} " alt="blog">
-                                    </div>
-                                    <div class="blog-content">
-                                        <div class="blog-post-meta">
-                                            <span class="date"> {{$post->created_at->translatedFormat('d M Y')}} </span>
-                                            <span class="comment"> {{$post->kg}} kg </span>
-                                        </div>
-                                        <h3 class="title"><a href="{{ route('posts.show', [$post->slug(), $post] ) }}">  {{ $post->title }} </a></h3>
-                                        <p> {{ $post->description }} </p>
-                                        <div class="blog-btn">
-                                            <a href="{{ route('posts.show', [$post->slug(), $post] ) }}">Voir plus <i
-                                                    class="icon-Group-2361 ml-2"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
+                        </div>
 
                         @endforeach
 

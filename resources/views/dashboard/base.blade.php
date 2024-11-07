@@ -536,14 +536,21 @@
     <!-- start scroll top -->
 
     @php
-      $post_vyg = App\Models\Post::find($post_expedition->id) ; 
 
-      //var_dump($post_vyg->voyageur_id) ; 
-      $user_vyg = App\Models\User::find($post_vyg->voyageur_id) ; 
+    /*  if ( $post_expedition && $post_expedition->exists &&  $post_voyage && $post_voyage->exists) {
 
-      //var_dump($user_vyg->name) ; 
+        $post_vyg = App\Models\Post::find($post_expedition->id) ; 
+        //var_dump($post_vyg->voyageur_id) ; 
+        $user_vyg = App\Models\User::find($post_vyg->voyageur_id) ; 
+        //var_dump($user_vyg->name) ;  
 
+      } else {
 
+        $post_vyg = Auth::user() ; 
+        $user_vyg = Auth::user() ; 
+
+      }*/
+    
     @endphp
 
     <div id="back-to-top">
@@ -579,7 +586,7 @@
 
      // Ajouter la couche OpenStreetMap
      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: ' {{$user_vyg->name}} &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution: ' {{ $post_expedition ? $post_expedition->voyageur->name : ''}} &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
      }).addTo(map);
 
     function updateMarker(lat, lng) {

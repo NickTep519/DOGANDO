@@ -22,7 +22,7 @@
           <div class="col-lg-6">
             <div class="breadcrumb-list text-end">
               <ul class="list-items">
-                <li><a href="index.html" class="text-white">Home</a></li>
+                <li><a href="{{route('home')}}" class="text-white">Home</a></li>
                 <li>Dashboard</li>
                 <li>Settings</li>
               </ul>

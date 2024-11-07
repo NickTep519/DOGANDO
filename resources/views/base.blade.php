@@ -81,8 +81,8 @@
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav main-menu ml-auto">
-                                        <li class="menu_has_children"><a href="{{route('annonces.voyage')}}"> Voyageurs </a></li>
-                                        <li><a href="{{route('annonces.expedition')}}"> Expediteur </a></li>
+                                        <li class="menu_has_children"><a href="{{route('trajets')}}"> Trajets </a></li>
+                                        <li><a href="#"> Services </a></li>
                                         <li><a href="{{route('blogs.index')}}">Blog</a></li>
                                         <li class="menu_has_children"><a href="{{route('home')}}"></a></li>
                                         @auth
@@ -101,7 +101,7 @@
                                         @endauth
                                         @guest
                                         <li><a href="{{route('register')}}">S'inscrire</a></li>
-                                        <li class="menu_has_children"><a href="{{route('login')}}">Se Conecter</a></li>
+                                        <li class="menu_has_children"><a href="{{route('login')}}">Se Connecter</a></li>
                                         @endguest
                                     </ul>
                                     <!--<div class="header-right">
@@ -111,7 +111,7 @@
                                             <a href="service-details.html" class="action-btn two"><i
                                                     class="icon-btn-icon"></i></a>
                                             <div class="header-action">
-                                                <a href="{{route('annonces.voyage')}}" class="btn--base"><i
+                                                <a href="{{route('trajets')}}" class="btn--base"><i
                                                         class="icon-btn-icon"></i>Voir des annonces</a>
                                             </div>
                                         </div>
@@ -1062,20 +1062,19 @@
                     <div class="row mb-30-none">
                         <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
                             <div class="footer-widget">
-                                <h4 class="title">Get started</h4>
+                                <h4 class="title">Commencer</h4>
                                 <ul class="footer-list">
-                                    <li><a href="index.html#0">{{config('app.name')}}</a></li>
-                                    <li><a href="index.html#0">S'inscrire</a></li>
-                                    <li><a href="index.html#0">Se Connecter</a></li>
-                                    <li><a href="index.html#0">Annonces</a></li>
+                                    <li><a href="{{route('home')}}">{{config('app.name')}}</a></li>
+                                    <li><a href="{{route('register')}}">S'inscrire</a></li>
+                                    <li><a href="{{route('login')}}">Se Connecter</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
                             <div class="footer-widget">
-                                <h4 class="title">How it works</h4>
+                                <h4 class="title">Comment ça marche</h4>
                                 <ul class="footer-list">
-                                    <li><a href="index.html#0">How it works</a></li>
+                                    <li><a href="{{route('posts.create')}}">Créer une annonce</a></li>
                                     <li><a href="index.html#0">Ways to fly</a></li>
                                     <li><a href="index.html#0">Ways to buy</a></li>
                                     <li><a href="index.html#0">Private charter</a></li>
@@ -1118,7 +1117,7 @@
                             <li><a href="index.html#0"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                     </div>
-                    <p>© 2022 Fly Next Airlines. All rights reserved.</p>
+                    <p>© DOGANDO. Tous droits réservés.</p>
                 </div>
             </div>
         </footer>

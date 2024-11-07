@@ -59,12 +59,9 @@ Route::resource('posts', PostController::class)->except(['index', 'show']) ;
 
 Route::resource('blogs', BlogController::class) ; 
 
-Route::prefix('posts')->name('annonces.')->group(function(){
-    Route::get('/annonces-voyageurs', [AnnoncesController::class, 'voyage'])->name('voyage') ; 
-    Route::get('/annonces-expediteurs', [AnnoncesController::class, 'expedition'])->name('expedition') ; 
-}) ; 
+Route::get('/trajets', [AnnoncesController::class, 'trajets'])->name('trajets') ; 
 
-Route::get('posts/annonces/{slug}-{post}', [AnnoncesController::class, 'show'])->name('posts.show')->where([
+Route::get('trajets/{slug}-{post}', [AnnoncesController::class, 'show'])->name('posts.show')->where([
     'slug' => '[a-z0-9\-]+',
     'post' => '[0-9]+'
 ]) ; 
@@ -75,6 +72,11 @@ Route::prefix('/posts')->name('offers.')->middleware('auth')->group(function() {
     Route::post('/{offer}/status', [OfferController::class, 'updateOfferStatus'])->name('update.status');
     
 } ) ; 
+
+/*Route::prefix('')->name('annonces.')->group(function() {
+    Route::get('/trajets', [AnnoncesController::class, 'trajets'])->name('voyage') ; 
+    Route::get('/annonces-expediteurs', [AnnoncesController::class, 'expedition'])->name('expedition') ; 
+}) ; */
 
 
 require __DIR__.'/auth.php';
