@@ -94,7 +94,7 @@
                         aria-controls="flight"
                         aria-selected="true"
                       >
-                        <i class="la la-plane me-1"></i>Voyage
+                        <i class="la la-plane me-1"></i>Offre
                       </a>
                     </li>  
                     @else
@@ -108,7 +108,7 @@
                         aria-controls="hotel"
                         aria-selected="true"
                       >
-                        <i class="la la-hotel me-1"></i>Expedition
+                        <i class="la la-hotel me-1"></i>Demande
                       </a>
                     </li>     
                     @endif
@@ -125,7 +125,7 @@
                       aria-controls="flight"
                       aria-selected="true"
                     >
-                      <i class="la la-plane me-1"></i>Voyage
+                      <i class="la la-plane me-1"></i>Offre
                     </a>
                   </li>
 
@@ -139,7 +139,7 @@
                       aria-controls="hotel"
                       aria-selected="false"
                     >
-                      <i class="la la-hotel me-1"></i>Expedition
+                      <i class="la la-hotel me-1"></i>Demande
                     </a>
                   </li>
                   @endif
@@ -159,7 +159,7 @@
                   <div class="section-tab section-tab-2 pb-3">
                     <ul class="nav nav-tabs" id="myTab3" role="tablist">
                       <li class="nav-item">
-                        <a
+                        <!--<a
                           class="nav-link active"
                           id="one-way-tab"
                           data-bs-toggle="tab"
@@ -167,8 +167,8 @@
                           role="tab"
                           aria-controls="one-way"
                           aria-selected="true"
-                        >
-                          V
+                        >-->
+                          
                         </a>
                       </li>
                     </ul>
@@ -234,7 +234,7 @@
                           </div>
                           <div class="col-lg-6 pe-0">
                             <div class="input-box">
-                              <label for="kg" class="label-text">Kilos : </label>
+                              <label for="kg" class="label-text">Poids : </label>
                               <div class="form-group">
                                 <input
                                   {{$post->exists ? 'readonly' : '' }}
@@ -388,7 +388,7 @@
                                   id="starts_at"
                                   value="{{old('starts_at', $post->starts_at)}}"
                                   class="date-range form-control"
-                                  type="datetime-local"
+                                  type="date"
                                   name="daterange-single"
                                 />
                                 @error('starts_at')
@@ -410,7 +410,7 @@
                                   id="ends_at"
                                   value="{{old('ends_at', $post->ends_at)}}"
                                   class="date-range form-control"
-                                  type="datetime-local"
+                                  type="date"
                                   name="daterange-single"
                                 />
                                 @error('ends_at')
@@ -456,7 +456,7 @@
                   <div class="section-tab section-tab-2 pb-3">
                     <ul class="nav nav-tabs" id="myTab3" role="tablist">
                       <li class="nav-item">
-                        <a
+                        <!--<a
                           class="nav-link active"
                           id="one-way-tab"
                           data-bs-toggle="tab"
@@ -466,7 +466,7 @@
                           aria-selected="true"
                         >
                           Ex
-                        </a>
+                        </a>-->
                       </li>
                     </ul>
                   </div>
@@ -530,9 +530,10 @@
                               </div>
                             </div>
                           </div>
+
                           <div class="col-lg-6 pe-0">
                             <div class="input-box">
-                              <label for="kg" class="label-text">Kilos</label>
+                              <label for="kg" class="label-text">Poids</label>
                               <div class="form-group">
                                 <input
                                   {{$post->exists ? 'readonly' : '' }}
@@ -555,13 +556,23 @@
 
                           <div class="col-lg-6 pe-0">
                             <div class="input-box">
+                              <label for="price" class="label-text">Prix/kg : </label>
                               <div class="form-group">
                                 <input
-                                  name="type"
-                                  value="0"
+                                  {{$post->exists ? 'readonly' : '' }}
+
+                                  name="price"
+                                  id="price"
+                                  value="{{old('price', $post->price)}}"
                                   class="form-control"
-                                  type="hidden"
+                                  type="text"
+                                  placeholder="Prix par kilogramme (facultatif)"
                                 />
+                                @error('price')
+                                    <div class="alert alert-danger" >
+                                      {{$message}}
+                                    </div>
+                                @enderror
                               </div>
                             </div>
                           </div>           <!-- end col-lg-3 -->
@@ -643,6 +654,63 @@
                               </div>
                             </div>
                           </div>         <!-- end col-lg-3 -->
+
+                          <div class="col-lg-6 pe-0">
+                            <div class="input-box">
+                              <label for="starts_at" class="label-text">Date depart : </label>
+                              <div class="form-group">
+                                <span class="la la-calendar form-icon"></span>
+                                <input
+                                  name="starts_at"
+                                  id="starts_at"
+                                  value="{{old('starts_at', $post->starts_at)}}"
+                                  class="date-range form-control"
+                                  type="date"
+                                  name="daterange-single"
+                                />
+                                @error('starts_at')
+                                    <div class="alert alert-danger" >
+                                      {{$message}}
+                                    </div>
+                                @enderror
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end col-lg-3 -->
+                          <div class="col-lg-6 pe-0">
+                            <div class="input-box">
+                              <label for="ends_at" class="label-text">Date arrivée : </label>
+                              <div class="form-group">
+                                <span class="la la-calendar form-icon"></span>
+                                <input
+                                  name="ends_at"
+                                  id="ends_at"
+                                  value="{{old('ends_at', $post->ends_at)}}"
+                                  class="date-range form-control"
+                                  type="date"
+                                  name="daterange-single"
+                                />
+                                @error('ends_at')
+                                    <div class="alert alert-danger" >
+                                      {{$message}}
+                                    </div>
+                                @enderror
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-lg-6 pe-0">
+                            <div class="input-box">
+                              <div class="form-group">
+                                <input
+                                  name="type"
+                                  value="0"
+                                  class="form-control"
+                                  type="hidden"
+                                />
+                              </div>
+                            </div>
+                          </div>           <!-- end col-lg-3 -->
 
                           <div class="col-lg-3">
                             <button  class="theme-btn w-100 text-center margin-top-20px" > @if ($post->exists) Modifier @else Ajouter @endif</button>

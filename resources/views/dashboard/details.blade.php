@@ -13,7 +13,7 @@
             <div class="breadcrumb-content">
               <div class="section-heading">
                 <h2 class="sec__title font-size-30 text-white">
-                  Details sur l'annonce
+                  {{$post->type ? 'Details sur l\'offre' : 'Details sur la demande'}}
                 </h2>
               </div>
             </div>
@@ -42,12 +42,14 @@
           <div class="col-lg-12">
             <div class="form-box">
               <div class="form-title-wrap">
-                <h3 class="title">Details sur l'annonce</h3>
+                <h3 class="title">
+                  {{$post->type ? 'Details sur l\'offre' : 'Details sur la demande'}}
+                </h3>
               </div>
               <div class="form-content">
                 <ul class="list-items list-items-2 list-items-flush">
                     <li>
-                        <span>Annonce :</span>   @if ($post->type) Voyage @else Expedition @endif 
+                        <span>Trajet :</span>   @if ($post->type) Offre @else Demande @endif 
                     </li>
                     <li>
                         <span>Titre : </span> {{$post->title}}  
@@ -85,9 +87,9 @@
 
                     <li> 
                       @if ($post->type)
-                      <span> Expedition :</span> @if ($post->status) {{ App\Models\User::find($post->expediteur_id)->name }} @else @if ($post->status === NULL) --- @else En cours.. @endif @endif
+                      <span> Demande :</span> @if ($post->status) {{ $post->expediteur->name }} @else @if ($post->status === NULL) --- @else En cours.. @endif @endif
                       @else
-                      <span> Voyage :</span> @if ($post->status) {{ App\Models\User::find($post->voyageur_id)->name }} @else @if ($post->status === NULL) --- @else En cours.. @endif @endif
+                      <span> Offre :</span> @if ($post->status) {{ $post->voyageur->name }} @else @if ($post->status === NULL) --- @else En cours.. @endif @endif
                       @endif
                     </li>
                   
@@ -112,8 +114,9 @@
                   <a
                     href="{{route('offers.show', $post)}}"
                     class="theme-btn theme-btn-small"
-                    >Voire les demande</a
+                    >{{ $post->type ? 'Voir les demandes ' : 'Voir les offres' }}</a
                   >
+                  
                 </div>
 
                 

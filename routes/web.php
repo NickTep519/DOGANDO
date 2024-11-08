@@ -28,8 +28,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home') ;
 
 Route::prefix('/dashboard')->middleware(['auth','check.user.details', 'verified'])->name('dashboard.')->group(function() {
     Route::get('/', [DashboardController::class, 'user'] )->name('user') ; 
-    Route::get('/voyage', [DashboardController::class, 'voyage'])->name('voyage') ; 
-    Route::get('expeditions/', [DashboardController::class, 'expedition'])->name('expedition') ; 
+    Route::get('/offres', [DashboardController::class, 'voyage'])->name('voyage') ; 
+    Route::get('/demandes', [DashboardController::class, 'expedition'])->name('expedition') ; 
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile') ; 
     Route::get('/posts/{post}/details', [DashboardController::class, 'details'])->name('posts.details') ; 
 } ) ;  

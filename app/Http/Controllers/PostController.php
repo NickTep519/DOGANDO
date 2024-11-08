@@ -56,14 +56,14 @@ class PostController extends Controller
             'description' => '3kg de disponibles, toute personne ayant besoins veuille me contacter',
             'kg' => 3,
             'price' => 3000,
-            'city_starts' => 'COTONOU',
-            'city_ends' => 'YAOUNDE',
+            'city_starts' => '',
+            'city_ends' => '',
             'company' => 'Air France',
             'starts_at' => now(),
             'ends_at' => now()->month(11)
         ]) ; 
 
-        $transport = ['avion', 'bateau'] ; 
+        $transport = ['avion', 'bateau', 'train'] ; 
 
         return view('post.form', [
             'post' => $post, 
@@ -99,7 +99,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
 
-        $transport = ['avion', 'bateau'] ; 
+        $transport = ['avion', 'bateau', 'train'] ; 
+        
 
 
         return view('post.form', [

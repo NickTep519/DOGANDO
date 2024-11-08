@@ -12,7 +12,7 @@
             <div class="breadcrumb-content">
               <div class="section-heading">
                 <h2 class="sec__title font-size-30 text-white">
-                  Mes Expeditions
+                  Mes Demandes
                 </h2>
               </div>
             </div>
@@ -24,7 +24,7 @@
               <ul class="list-items">
                 <li><a href="{{route('home')}}" class="text-white">Home</a></li>
                 <li>Dashboard</li>
-                <li>Expeditions</li>
+                <li>Mes demandes</li>
               </ul>
             </div>
             <!-- end breadcrumb-list -->
@@ -45,10 +45,10 @@
                   class="d-flex align-items-center justify-content-between"
                 >
                   <div>
-                    <h3 class="title">Mes expeditions</h3>
+                    <h3 class="title">Mes Demandes</h3>
                   </div>
                   <span
-                    >Mes Voyages
+                    >Mes Demandes
                     <strong class="color-text">{{ $expeditions }}</strong></span
                   >
                 </div>

@@ -309,17 +309,17 @@
             </li>
             <li >
               <a href="{{route('posts.create')}}"
-                ><i class="la la-shopping-cart me-2 text-color"></i>Ajouter</a
+                ><i class="la la-shopping-cart me-2 text-color"></i>Créer un trajet</a
               >
             </li>
             <li @class(['', 'page-active' => $active['voyage']]) >
               <a href="{{route('dashboard.voyage')}}"
-                ><i class="la la-shopping-cart me-2 text-color"></i> Voyages</a
+                ><i class="la la-shopping-cart me-2 text-color"></i> Mes Offres</a
               >
             </li>
             <li @class(['', 'page-active' => $active['expedition']]) >
                 <a href="{{route('dashboard.expedition')}}"
-                  ><i class="la la-shopping-cart me-2 text-color"></i> Expeditions</a
+                  ><i class="la la-shopping-cart me-2 text-color"></i> Mes Demandes</a
                 >
             </li>
             <li >
@@ -423,7 +423,7 @@
                                                   @endforeach
                        
                                                 </div>
-                                                <a href="user-dashboard.html#" class="dropdown-item drop-reveal-btn text-center" > View all </a>
+                                                <a href="user-dashboard.html#" class="dropdown-item drop-reveal-btn text-center" > Voir tout </a>
                                                 </div>  <!-- end dropdown-menu -->
                                             </div>
                                         </div>    <!-- end notification-item -->
@@ -466,7 +466,7 @@
                                                     >
                                                         <div class="msg-body">
                                                             <div class="msg-content">
-                                                                <h3 class="title"> <i class="la la-shopping-cart me-2"></i> Voyages </h3>
+                                                                <h3 class="title"> <i class="la la-shopping-cart me-2"></i> Mes Offres </h3>
                                                             </div>
                                                         </div>   <!-- end msg-body -->
                                                     </a>
@@ -476,7 +476,7 @@
                                                     >
                                                         <div class="msg-body">
                                                             <div class="msg-content">
-                                                                <h3 class="title"> <i class="la la-shopping-cart me-2"></i> Expeditions </h3>
+                                                                <h3 class="title"> <i class="la la-shopping-cart me-2"></i> Mes Demandes </h3>
                                                             </div>
                                                         </div>    <!-- end msg-body -->
                                                     </a>

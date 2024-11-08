@@ -14,7 +14,7 @@
                 <div class="col-lg-6">
                     <div class="breadcrumb-content">
                         <div class="section-heading">
-                            <h2 class="sec__title font-size-30 text-white">Demandes</h2>
+                            <h2 class="sec__title font-size-30 text-white">Demandes/Offres</h2>
                         </div>
                     </div>               <!-- end breadcrumb-content -->
                 </div>           <!-- end col-lg-6 -->
@@ -24,7 +24,7 @@
                         <ul class="list-items">
                             <li><a href="{{route('home')}}" class="text-white">Home</a></li>
                             <li>Dashboard</li>
-                            <li>Demandes</li>
+                            <li>Demandes/Offres</li>
                         </ul>
                     </div>         <!-- end breadcrumb-list -->
                 </div>          <!-- end col-lg-6 -->
@@ -40,7 +40,7 @@
                     <div class="form-box">
                         <div class="form-title-wrap">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h3 class="title">Demandes</h3>
+                                <h3 class="title">Demandes/Offres</h3>
                                 
                             </div>
                         </div>
@@ -92,7 +92,7 @@
 
                             </div>       <!-- end card-item -->    
                             @empty
-                            <p>Il n'y a aucune demande en attente pour cette annonce. </p>    
+                            <p>Il n'y a aucune demande/offre en attente pour cette annonce. </p>    
                             @endforelse
 
                             
